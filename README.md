@@ -5,14 +5,14 @@ _Making parallel bash commands elegant ✨._
 Suppose we want to run the two commands
 
 ```bash
-cargo clippy
-cargo test
+run_unit_tests
+run_integration_tests
 ```
 
 We can instead re-write this as
 
 ```
-multi -c "cargo clippy" -c "cargo test"
+multi -c "run_unit_tests" -c "run_integration_tests"
 ```
 
 To the end-user, nothing will occur differenly.
