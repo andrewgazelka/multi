@@ -1,6 +1,6 @@
 [package]
 name = "multi"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "An easy way to run multiple commands in parallel"
 license = "MIT OR Apache-2.0"
@@ -10,3 +10,4 @@ license = "MIT OR Apache-2.0"
 [dependencies]
 clap = { version = "4.0", features = ["derive"] }
 tokio = { version = "1.23.0", features = ["full"] }
+anyhow = "1.0.68"

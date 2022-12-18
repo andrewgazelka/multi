@@ -1,3 +1,4 @@
+use anyhow::Context;
 use clap::Parser;
 use tokio::{
     io::{stdout, AsyncReadExt, AsyncWriteExt},
@@ -117,8 +118,7 @@ impl Runner {
     }
 }
 
-#[tokio::main]
-async fn main() {
+async fn run() -> anyhow::Result<()> {
     let Args { commands } = Args::parse();
 
     let mut children = Vec::new();
@@ -135,7 +135,7 @@ async fn main() {
             .stdout(std::process::Stdio::piped()) // TODO: make not piped
             .stderr(std::process::Stdio::piped())
             .spawn()
-            .expect("could not spawn command");
+            .with_context(|| format!("could not spawn command {command}"))?;
 
         children.push(cmd);
     }
@@ -144,4 +144,14 @@ async fn main() {
 
     let ls = LocalSet::new();
     ls.run_until(runner.run()).await;
+
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() {
+    match run().await {
+        Ok(..) => {}
+        Err(e) => println!("{e}"),
+    }
 }
