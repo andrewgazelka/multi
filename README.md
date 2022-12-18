@@ -1,6 +1,6 @@
 # `multi`
 
-Run multiple commands faster and more simply.
+_Making parallel bash commands elegant ✨._
 
 Suppose we want to run the two commands
 
